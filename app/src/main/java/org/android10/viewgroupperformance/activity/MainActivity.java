@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import org.android10.gintonic.annotation.DebugTrace;
 import org.android10.viewgroupperformance.R;
 
 public class MainActivity extends Activity {
@@ -58,6 +60,7 @@ public class MainActivity extends Activity {
   /**
    * Open and activity
    */
+  @DebugTrace
   private void openActivity(Class activityToOpen) {
     Intent intent = new Intent(this, activityToOpen);
     startActivity(intent);
