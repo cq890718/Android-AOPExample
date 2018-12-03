@@ -10,38 +10,25 @@
     tools:context=".MainActivity"
     >
 
-  <TextView
+  <Button
+      android:id="@+id/btnBefore"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="@string/url"
-      android:gravity="center"
-      />
-
-  <ImageView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:src="@drawable/logo"
+      android:text="Before Test"
       />
 
   <Button
-      android:id="@+id/btnRelativeLayout"
+      android:id="@+id/btnAfter"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Relative Layout Test"
+      android:text="After Test"
       />
 
   <Button
-      android:id="@+id/btnLinearLayout"
+      android:id="@+id/btnAround"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Linear Layout Test"
-      />
-
-  <Button
-      android:id="@+id/btnFrameLayout"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="Frame Layout Test"
+      android:text="Around Test"
       />
 
 </LinearLayout>

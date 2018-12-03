@@ -1,19 +1,22 @@
 package org.android10.viewgroupperformance.activity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import org.android10.gintonic.annotation.DebugTrace;
+import org.android10.gintonic.annotation.DebugAfter;
+import org.android10.gintonic.annotation.DebugAround;
+import org.android10.gintonic.annotation.DebugBefore;
 import org.android10.viewgroupperformance.R;
 
 public class MainActivity extends Activity {
+  private static final String TAG = MainActivity.class.getSimpleName();
 
-  private Button btnRelativeLayoutTest;
-  private Button btnLinearLayoutTest;
-  private Button btnFrameLayoutTest;
+  private Button btnBefore;
+  private Button btnAfter;
+  private Button btnAround;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -26,43 +29,43 @@ public class MainActivity extends Activity {
    * Maps Graphical User Interface
    */
   private void mapGUI() {
-    this.btnRelativeLayoutTest = (Button) findViewById(R.id.btnRelativeLayout);
-    this.btnRelativeLayoutTest.setOnClickListener(btnRelativeLayoutOnClickListener);
+    this.btnBefore = (Button) findViewById(R.id.btnBefore);
+    this.btnBefore.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        testBefore();
+      }
+    });
 
-    this.btnLinearLayoutTest = (Button) findViewById(R.id.btnLinearLayout);
-    this.btnLinearLayoutTest.setOnClickListener(btnLinearLayoutOnClickListener);
+    this.btnAfter = (Button) findViewById(R.id.btnAfter);
+    this.btnAfter.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        testAfter();
+      }
+    });
 
-    this.btnFrameLayoutTest = (Button) findViewById(R.id.btnFrameLayout);
-    this.btnFrameLayoutTest.setOnClickListener(btnFrameLayoutOnClickListener);
+    this.btnAround = (Button) findViewById(R.id.btnAround);
+    this.btnAround.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        testAround();
+      }
+    });
   }
 
-  private View.OnClickListener btnRelativeLayoutOnClickListener = new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-      openActivity(RelativeLayoutTestActivity.class);
-    }
-  };
+  @DebugBefore
+  private void testBefore() {
+    Log.d(TAG, "testBefore running");
+  }
 
-  private View.OnClickListener btnLinearLayoutOnClickListener = new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-      openActivity(LinearLayoutTestActivity.class);
-    }
-  };
+  @DebugAfter
+  private void testAfter() {
+    Log.d(TAG, "testAfter running");
+  }
 
-  private View.OnClickListener btnFrameLayoutOnClickListener = new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-      openActivity(FrameLayoutTestActivity.class);
-    }
-  };
-
-  /**
-   * Open and activity
-   */
-  @DebugTrace
-  private void openActivity(Class activityToOpen) {
-    Intent intent = new Intent(this, activityToOpen);
-    startActivity(intent);
+  @DebugAround
+  private void testAround() {
+    Log.d(TAG, "testAround running");
   }
 }
